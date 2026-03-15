@@ -168,8 +168,6 @@ module:
 deployment:
   targets:
     - name: aws
-      URL: 's3://www.your-domain.tld'
-      cloudFrontDistributionID: E9RZ8T1EXAMPLEID
-
-
+      URL: 's3://org-kickstart-site-sitebucket-adif0s46ylj7'
+      cloudFrontDistributionID: E1Q5JBXS29PT0T
 
