@@ -1,0 +1,155 @@
+baseURL: https://aws-kickstart.org
+title: Org Kickstart
+
+# Language settings
+contentDir: content/en
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+enableMissingTranslationPlaceholders: true
+
+enableRobotsTXT: true
+
+# Will give values to .Lastmod etc.
+enableGitInfo: true
+
+taxonomies:
+  tag: tags
+  category: categories
+
+# Highlighting config
+pygmentsCodeFences: true
+pygmentsUseClasses: false
+pygmentsUseClassic: false
+pygmentsStyle: tango
+
+mediaTypes:
+  text/redirects:
+    delimiter: ''
+
+outputFormats:
+  redirects:
+    baseName: _redirects
+    isPlainText: true
+    mediaType: text/redirects
+    root: true
+
+# Configure how URLs look like per section.
+permalinks:
+  blog: /:section/:year/:month/:day/:slugorcontentbasename
+
+# Image processing configuration.
+imaging:
+  resampleFilter: CatmullRom
+  quality: 75
+  anchor: smart
+
+# Language configuration
+languages:
+  en:
+    languageName: English
+    title: Org Kickstart
+    params:
+      description: Kickstart and manage your AWS Organization with Terraform <br> Friends don't let friends run Control Tower
+
+markup:
+  goldmark:
+    parser:
+      attribute:
+        block: true
+    renderer:
+      unsafe: true
+  highlight:
+    style: tango
+    noClasses: false
+
+# Comment out if you don't want the "print entire section" link enabled.
+outputs:
+  home: [HTML, print, RSS, redirects]
+  section: [HTML, print, RSS]
+
+params:
+  taxonomy:
+    taxonomyCloud: [tags, categories]
+    taxonomyCloudTitle: [Tag Cloud, Categories]
+    taxonomyPageHeader: [tags, categories]
+
+  # Social card image
+  images: [images/KickControlTower.png]
+
+  # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
+  github_repo: https://github.com/primeharbor/org-kickstart
+  github_project_repo: https://github.com/primeharbor/org-kickstart
+  github_branch: main
+
+  # Enable Lunr.js offline search
+  offlineSearch: true
+
+  # Enable syntax highlighting and copy buttons on code blocks with Prism
+  prism_syntax_highlighting: false
+
+  copyright:
+    authors: >-
+      Chris Farris / PrimeHarbor Technologies, LLC |
+      [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
+    from_year: 2023
+    to_year: present
+
+  # User interface configuration
+  ui:
+    breadcrumb_disable: false
+    navbar_logo: true
+    navbar_translucent_over_cover_disable: false
+    sidebar_menu_foldable: true
+    sidebar_menu_compact: false
+    sidebar_search_disable: false
+    showLightDarkModeMenu: true
+
+    feedback:
+      enable: true
+      yes: >-
+        Glad to hear it! Please <a
+        href="https://github.com/primeharbor/org-kickstart/issues/new">tell us how we
+        can improve</a>.
+      no: >-
+        Sorry to hear that. Please <a
+        href="https://github.com/primeharbor/org-kickstart/issues/new">tell us how we
+        can improve</a>.
+
+    readingtime:
+      enable: false
+
+  btn-lg: class="btn btn-lg btn-{1}" role="button"
+  FA: <i class="fa-{1} fa-{2} text-{3} px-1"></i>
+
+  links:
+    user:
+      - name: GitHub Issues
+        url: https://github.com/primeharbor/org-kickstart/issues
+        icon: fab fa-github
+        desc: Report bugs and request features
+      - name: Discussions
+        url: https://github.com/primeharbor/org-kickstart/discussions
+        icon: fa fa-comments
+        desc: Ask questions and share ideas with the community
+    developer:
+      - name: GitHub
+        url: https://github.com/primeharbor/org-kickstart
+        icon: fab fa-github
+        desc: Source code and contributions
+      - name: PrimeHarbor
+        url: https://www.primeharbor.com
+        icon: fa-solid fa-building
+        desc: Professional support and consulting
+
+security:
+  funcs:
+    getenv:
+      - ^(BRANCH|BUILD_ID|COMMIT_REF|CONTEXT|DEPLOY_ID|NETLIFY|PULL_REQUEST|REVIEW_ID)$
+
+module:
+  hugoVersion:
+    extended: true
+    min: 0.155.0
+  imports:
+    - path: github.com/google/docsy
+      disable: false
