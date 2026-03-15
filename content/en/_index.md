@@ -21,7 +21,7 @@ params:
     Get Started
   </a>
   <a {{% _param btn-lg secondary %}}
-    href="{{% param github_repo %}}"
+    href="{{% param github_project_repo %}}"
     target="_blank" rel="noopener noreferrer">
     View on GitHub
     {{% _param FA brands github "" %}}
@@ -53,7 +53,7 @@ across every region and every account in your organization.
 
 {{% blocks/feature
   title="Policy as Code" icon="fa-file-code"
-  url="docs/reference/"
+  url="docs/tasks/creating-policies/"
 %}}
 
 Manage **Service Control Policies**, **Resource Control Policies**, and **Declarative Policies**
@@ -63,7 +63,7 @@ from Terraform, with templating support for org-specific variables.
 
 {{% blocks/feature
   title="Account Factory" icon="fab fa-aws"
-  url="docs/getting-started/"
+  url="docs/tasks/adding-an-account/"
 %}}
 
 Add an account to a tfvars file and get a fully configured AWS account in the right OU, with SSO

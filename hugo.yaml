@@ -76,8 +76,10 @@ params:
   # Social card image
   images: [images/KickControlTower.png]
 
-  # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-  github_repo: https://github.com/primeharbor/org-kickstart
+  # Repository configuration
+  # github_repo drives "Edit this page" and "Open an issue" buttons on every doc page
+  # github_project_repo drives the GitHub icon in the top nav bar
+  github_repo: https://github.com/primeharbor/org-kickstart-site
   github_project_repo: https://github.com/primeharbor/org-kickstart
   github_branch: main
 
@@ -90,7 +92,7 @@ params:
   copyright:
     authors: >-
       Chris Farris / PrimeHarbor Technologies, LLC |
-      [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
+      [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | Site built with [Hugo](https://gohugo.io/) based on [docsy](https://docsy.dev/)
     from_year: 2023
     to_year: present
 
@@ -141,6 +143,15 @@ params:
         icon: fa-solid fa-building
         desc: Professional support and consulting
 
+  version_menu: Releases
+  versions:
+    - version: latest
+      url: 'https://github.com/primeharbor/org-kickstart/blob/0.3.0/docs/v0.3.0-notes.md'
+    - version: v0.2.0
+      url: 'https://github.com/primeharbor/org-kickstart/blob/0.2.0/docs/v0.2.0-notes.md'
+    - version: v0.3.0
+      url: 'https://github.com/primeharbor/org-kickstart/blob/0.3.0/docs/v0.3.0-notes.md'
+
 security:
   funcs:
     getenv:
@@ -153,3 +164,12 @@ module:
   imports:
     - path: github.com/google/docsy
       disable: false
+
+deployment:
+  targets:
+    - name: aws
+      URL: 's3://www.your-domain.tld'
+      cloudFrontDistributionID: E9RZ8T1EXAMPLEID
+
+
+

@@ -114,7 +114,8 @@ This site uses standard Docsy shortcodes. Commonly used ones:
 ## Configuration Notes (`hugo.yaml`)
 
 - **`baseURL`**: `https://aws-kickstart.org`
-- **`github_repo`** / **`github_project_repo`**: both point to `https://github.com/primeharbor/org-kickstart` — this powers the "Edit this page" and "Open an issue" links on every doc page.
+- **`github_repo`**: `https://github.com/primeharbor/org-kickstart-site` — powers the **"Edit this page"** and **"Open an issue"** buttons on every doc page (links into the site source repo).
+- **`github_project_repo`**: `https://github.com/primeharbor/org-kickstart` — powers the GitHub icon in the top nav bar (links to the Terraform module repo).
 - **`params.images`**: set to `[images/KickControlTower.png]` for Open Graph / social card.
 - **`offlineSearch: true`**: uses Lunr.js; no external search service required.
 - **`enableGitInfo: true`**: populates `.Lastmod` on pages from Git history. Requires a full (non-shallow) clone to work correctly.
@@ -126,9 +127,9 @@ This site uses standard Docsy shortcodes. Commonly used ones:
 
 This site is open to contributions from the community. When helping contributors:
 
-1. Direct them to fork `https://github.com/primeharbor/org-kickstart` (the site lives inside the monorepo).
-2. Edits go under `org-kickstart-site/content/en/`.
-3. Preview with `hugo server` before submitting a PR.
+1. Direct them to fork `https://github.com/primeharbor/org-kickstart-site`.
+2. Edits go under `content/en/`.
+3. Preview with `make test` before submitting a PR.
 4. The **Edit this page** button on every doc page links directly to the source file on GitHub.
 5. For significant structural changes, open a GitHub Discussion first.
 

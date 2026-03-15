@@ -9,7 +9,7 @@ Management (Payer) account. Terraform cannot perform these actions automatically
 
 ## Root Account Tasks
 
-Log into the **root** user of your new AWS account and complete the following:
+Log into the **root** user of your new AWS "payer" account and complete the following:
 
 1. [Add MFA to root](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials)
 2. [Enable IAM access to billing](https://us-east-1.console.aws.amazon.com/billing/home?region=us-east-1#/account)

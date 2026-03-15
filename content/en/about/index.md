@@ -27,6 +27,8 @@ It is designed to give AWS practitioners a production-grade organizational landi
 without the overhead of AWS Control Tower. Deploy security services, account governance,
 and organizational guardrails from a single Terraform module.
 
+***Friends don't let friends run Control Tower***
+
 {{% /blocks/lead %}}
 
 {{% blocks/section type="row" color="primary" %}}
@@ -51,7 +53,8 @@ Professional support and implementation services are available.
 
 {{% blocks/feature title="Prior Art" icon="fa-solid fa-book" %}}
 
-Org Kickstart builds on the community's work. See also:
+Org Kickstart builds on the community's work. <br>See also:
+[org-formation](https://github.com/org-formation/org-formation-cli),
 [terraform-aws-personal-org](https://github.com/george-richardson/terraform-aws-personal-org) and
 [terraform-aws-organzation-and-sso](https://github.com/chris-qa-org/terraform-aws-organzation-and-sso).
 
