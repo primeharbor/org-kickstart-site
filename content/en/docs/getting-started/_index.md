@@ -18,21 +18,29 @@ Before running Org Kickstart you need:
 ## Steps
 
 1. Complete the [Bootstrap](bootstrap/) steps in the AWS Console
-2. Clone or reference the module from the [Terraform Registry](https://registry.terraform.io/modules/primeharbor/org-kickstart)
-3. Create a `tfvars` file for your organization (see the [Reference](../reference/) for all variables)
-4. Initialize Terraform with your state backend:
+2. Copy [`examples/pipeline`](https://github.com/primeharbor/org-kickstart/tree/main/examples/pipeline)
+   to your own private repo — it includes the `Makefile`, backend config, and directory layout
+3. Create `your-org.tfvars` and `your-org.tfbackend` for your organization
+   (see the [Reference](../reference/) for all variables; name them to match your `env` value)
+4. Initialize Terraform:
    ```bash
-   terraform init -backend-config="your-org.tfbackend"
+   make env=your-org tf-init
    ```
-5. Create the Security Account first:
+5. Create the Security Account first (required before full apply):
    ```bash
    terraform apply -var-file="your-org.tfvars" -target module.security_account
    ```
-6. Apply the rest of the configuration:
+6. Deploy everything:
    ```bash
-   terraform plan -var-file="your-org.tfvars" -out=your-org.tfplan
-   terraform apply your-org.tfplan
+   make env=your-org tf-execute
    ```
+   This runs `tf-plan` followed by `tf-apply` — saving the plan, applying it, and writing
+   `output-your-org.json` to your state bucket.
+
+For subsequent updates, use:
+```bash
+make env=your-org update
+```
 
 ## Using with an Existing Organization
 
@@ -43,4 +51,5 @@ importing existing resources into Terraform state.
 
 See the [Reference](../reference/) page for a full annotated example. The
 [examples/pipeline](https://github.com/primeharbor/org-kickstart/tree/main/examples/pipeline)
-directory in the repository contains a sample private-repo layout for CI/CD deployments.
+directory in the repository contains a sample private-repo layout with a `Makefile`, backend config
+template, and scripts for CI/CD deployments.

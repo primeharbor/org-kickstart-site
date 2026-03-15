@@ -27,8 +27,15 @@ lives in the `accounts` map in your tfvars file.
 2. Plan and apply:
 
    ```bash
-   terraform plan -var-file="your-org.tfvars" -out=your-org.tfplan
-   terraform apply your-org.tfplan
+   make env=your-org tf-execute
+   ```
+
+   Or step-by-step to review the plan before applying:
+
+   ```bash
+   make env=your-org tf-plan
+   make env=your-org tf-show
+   make env=your-org tf-apply
    ```
 
 Org Kickstart will create the AWS account, place it in the correct OU, assign SSO access,

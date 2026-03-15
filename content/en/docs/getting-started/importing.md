@@ -32,11 +32,15 @@ Review the generated `import-org.tf` carefully before running Terraform.
    aws organizations list-policies --filter SERVICE_CONTROL_POLICY \
      --query 'Policies[].[Id,Name]' --output text
    ```
-4. Iterate with `terraform plan` until no unwanted changes appear:
+4. Iterate with `tf-plan` until no unwanted changes appear:
    ```bash
-   terraform plan -var-file="your-org.tfvars"
+   make env=your-org tf-plan
+   make env=your-org tf-show    # review the plan output
    ```
-5. Once satisfied, run `terraform apply`
+5. Once satisfied, apply:
+   ```bash
+   make env=your-org tf-apply
+   ```
 6. Incrementally enable additional features
 
 ## Manual Import Examples

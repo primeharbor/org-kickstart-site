@@ -40,11 +40,24 @@ Org Kickstart manages three types of AWS Organizations policies via the same Ter
    }
    ```
 
-3. Apply:
+3. Plan and apply:
 
    ```bash
-   terraform plan -var-file="your-org.tfvars"
-   terraform apply -var-file="your-org.tfvars"
+   make env=your-org tf-execute
+   ```
+
+   SCPs and RCPs are high-impact changes. Always review the plan before applying:
+
+   ```bash
+   make env=your-org tf-plan
+   make env=your-org tf-show
+   make env=your-org tf-apply
+   ```
+
+   You can also run a security scan of the plan with [Checkov](https://www.checkov.io/) before applying:
+
+   ```bash
+   make env=your-org checkov
    ```
 
 ## Policy Types
@@ -99,4 +112,4 @@ service_control_policies = {
 ## Sample Policies
 
 See the [`policies/`](https://github.com/primeharbor/org-kickstart/tree/main/policies) directory
-in the repository for a library of ready-to-use policies.
+in the repository for a library of ready-to-use policies. Or check out [PrimeHarbor's respository of Organizational Policies](https://github.com/primeharbor/aws-organizational-policies).

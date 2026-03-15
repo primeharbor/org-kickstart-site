@@ -18,9 +18,9 @@ All submissions require review via GitHub pull request.
 
 When modifying the module:
 
-- Use `terraform plan` extensively before apply
+- Use `make env=your-org tf-plan` extensively before applying
 - Test in a non-production organization first
-- Use targeted applies for risky changes: `terraform apply -target <resource>`
+- Use targeted applies for risky changes: `terraform apply -var-file="your-org.tfvars" -target <resource>`
 - Verify SCPs don't lock out root or prevent remediation
 
 ## Contributing to the Docs
@@ -35,17 +35,17 @@ Requirements:
 
 ```bash
 cd org-kickstart-site
-npm install
-hugo server
+make npm        # install Node dependencies (first time only)
+make test       # starts dev server at http://localhost:1319/
 ```
 
-The site will be available at `http://localhost:1313/`.
+Use `make test-drafts` to also render draft and future-dated content.
 
 ### Editing Pages
 
-1. Fork the [org-kickstart repo](https://github.com/primeharbor/org-kickstart)
+1. Fork the [org-kickstart-site repo](https://github.com/primeharbor/org-kickstart-site)
 2. Edit files under `org-kickstart-site/content/en/`
-3. Preview locally with `hugo server`
+3. Preview locally with `make test`
 4. Submit a pull request
 
 You can also click **Edit this page** in the top right of any documentation page to
