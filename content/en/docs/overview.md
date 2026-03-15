@@ -6,11 +6,11 @@ weight: 1
 
 ## What is Org Kickstart?
 
-Org Kickstart is an opinionated Terraform module for bootstrapping and managing AWS Organizations.
-It is PrimeHarbor's alternative to AWS Control Tower — designed to give you the good parts of a
+Org Kickstart is an opinionated Terraform module for bootstrapping and managing [AWS Organizations](https://aws.amazon.com/organizations/).
+It is PrimeHarbor's alternative to [AWS Control Tower](https://aws.amazon.com/controltower/) — designed to give you the good parts of a
 landing zone without the cost, complexity, and lock-in that Control Tower brings.
 
-Deployed into a brand new AWS Management (Payer) account, a single `terraform apply` will stand up
+Deployed into a brand new AWS Management (Payer) account, a single `terraform apply` can stand up
 a fully governed AWS Organization with security services enabled, organizational guardrails in place,
 and an account factory ready to provision new accounts.
 
@@ -21,8 +21,8 @@ and an account factory ready to provision new accounts.
 Control Tower is a massive beast designed to support highly regulated enterprises. For most
 organizations, it brings significant drawbacks:
 
-- **Expensive**: Heavy reliance on AWS Config means costs scale with the number of accounts and regions.
-- **Inflexible**: Modifications require navigating AWS Service Catalog customizations.
+- **Expensive**: Heavy reliance on [AWS Config](https://aws.amazon.com/config/) means costs scale with the number of accounts and regions.
+- **Inflexible**: Modifications require navigating [AWS Service Catalog](https://aws.amazon.com/servicecatalog/) customizations.
 - **Slow to update**: Features like Organization CloudTrail and GuardDuty Delegated Admin lagged behind
   AWS best practices for years.
 - **Complex**: You effectively need a PhD in AWS Service Catalog to change anything.
@@ -35,22 +35,22 @@ the governance — without the baggage.
 
 Org Kickstart deploys and manages:
 
-1. **Security Account** — Delegates GuardDuty, Macie, Inspector, Security Hub, SSO, and CloudFormation
-   StackSets to a dedicated Security Account. Configures all security services in every default region
+1. **Security Account** — Creates a [dedicated security account](https://www.chrisfarris.com/post/securityaccount/) and delegates [GuardDuty](https://aws.amazon.com/guardduty/), [Macie](https://aws.amazon.com/macie/), [Inspector](https://aws.amazon.com/inspector/), [Security Hub](https://aws.amazon.com/security-hub/), [SSO](https://aws.amazon.com/iam/identity-center/), and [CloudFormation StackSets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html)
+   to a dedicated Security Account. Configures all security services in every default region
    across all accounts.
-2. **CloudTrail** — Creates a CloudTrail bucket in the Security Account and enables an Organizations
+2. **CloudTrail** — Creates a [CloudTrail](https://aws.amazon.com/cloudtrail/) bucket in the Security Account and enables an Organizations
    CloudTrail in the Management Account.
 3. **Alternate Contacts** — Sets Billing, Operations, and Security contacts for all AWS accounts.
 4. **Organizational Units** — Creates four default OUs (Workloads, Governance, Sandbox, Suspended)
    plus any custom OUs you define.
-5. **AI Opt-Out Policy** — Creates and applies a default AI opt-out policy at the root OU.
+5. **AI Opt-Out Policy** — Creates and applies a default [AI opt-out policy](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html) at the root OU.
 6. **Account Management** — Manages AWS accounts and OU placement from Terraform.
 7. **Audit Role** — Deploys an Audit Role via CloudFormation StackSet to all accounts, trusting
    the Security Account.
-8. **Billing Reports** — Creates an S3 bucket for billing data and an Athena-compatible CUR report.
-9. **Organization Services** — Enables all important AWS Organization Integrated Services.
-10. **Org Policies** — Manages Service Control Policies, Declarative Policies, and Resource Control
-    Policies with Terraform templating support.
+8. **Billing Reports** — Creates an [S3](https://aws.amazon.com/s3/) bucket for billing data and an [Athena](https://aws.amazon.com/athena/)-compatible [CUR](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html) report.
+9. **Organization Services** — Enables all important [AWS Organization Integrated Services](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html).
+10. **Org Policies** — Manages [Service Control Policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html), [Declarative Policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html), and [Resource Control Policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html)
+    with Terraform templating support.
 11. **SSO / Identity Center** — Creates an `AdministratorAccess` Permission Set, an admin group,
     and assigns both to every account.
 
