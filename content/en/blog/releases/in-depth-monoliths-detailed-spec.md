@@ -4,6 +4,8 @@ date: 2025-06-01
 description: >
   Guide for migrating security services from the legacy region-based provider pattern
   to the new region variable approach introduced in AWS Provider 6.x.
+
+draft: true
 ---
 
 With the introduction of the `region` variable in the 6.x version of the AWS Terraform Provider,
@@ -42,7 +44,8 @@ EOF
 done
 ```
 
-Run `terraform plan` after generating `moves.tf` to verify the migration looks correct before applying.
+Run `make env=your-org tf-plan` after generating `moves.tf` to verify the migration looks correct,
+then `make env=your-org tf-apply` to apply.
 
 See the [full release notes](https://github.com/primeharbor/org-kickstart/blob/main/docs/v0.3.0-notes.md)
 for the complete list of renamed resources.

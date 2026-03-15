@@ -5,6 +5,7 @@ linkTitle: v0.3.0 Release
 description: >
   Declarative Policies, Resource Control Policies, Centralized Root Management, and more.
 author: '[Chris Farris](https://www.chrisfarris.com)'
+draft: true
 ---
 
 Org Kickstart v0.3.0 is now available. This release adds support for the newest AWS
