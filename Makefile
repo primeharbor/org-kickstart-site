@@ -21,12 +21,15 @@ npm:
 	npm install
 
 post:
-	mkdir content/blog/$(slug)
-	$(HUGO) new blog/$(slug)/index.md
+	mkdir content/en/blog/news/$(slug)
+	$(HUGO) new blog/news/$(slug)/index.md
 
-project:
-	mkdir content/projects/$(name)
-	$(HUGO) new projects/$(name)/index.md
+release:
+	mkdir content/en/blog/release/$(ver)
+	$(HUGO) new blog/release/$(ver)/index.md
+
+deploy: generate-module-docs
+	hugo deploy
 
 # -----------------------------------------------------------------------
 # Module documentation — auto-generated from Terraform source
