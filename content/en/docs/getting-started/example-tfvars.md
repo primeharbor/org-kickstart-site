@@ -140,6 +140,45 @@ organization = {
     disable_macie       = false
   }
 
+  # CloudFormation stacks to deploy into the payer account.
+  # Use this for billing notifications, cost alarms, or other payer-scoped
+  # automation. Exactly one of template_file or template_url is required.
+  payer_cloudformation_stacks = {
+    billing_alerts = {
+      stack_name    = "slack_billing_alerts"
+      template_file = "cloudformation/slack-Template.yaml"
+      regions       = ["us-east-1"]
+      parameters = {
+        pExecutionRate = "cron(0 09 * * ? *)"
+        # JSON parameter values can use a heredoc; the module canonicalizes
+        # JSON-valued parameters so whitespace differences don't cause drift.
+        pEventInput = <<-EOT
+          {
+            "threshold": "10",
+            "alert_percent": "20"
+          }
+        EOT
+        pSlackWebhookSecret = "SlackWebHook"
+        pRuleState          = "ENABLED"
+        pAccountDescription = "My-Payer"
+      }
+    }
+  }
+
+  # CloudFormation stacks to deploy into the security account via the
+  # OrganizationAccountAccessRole. Same schema as payer_cloudformation_stacks.
+  security_account_stacks = {
+    findings_processor = {
+      stack_name    = "security-findings-processor"
+      template_file = "cloudformation/findings-processor-Template.yaml"
+      regions       = ["us-east-1"]
+      parameters = {
+        pSlackWebhookSecret = "SlackWebHook"
+        pSeverityThreshold  = "MEDIUM"
+      }
+    }
+  }
+
   # Billing Alerts
   billing_alerts = {
     levels = {

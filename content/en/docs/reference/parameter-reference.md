@@ -197,3 +197,79 @@ budget_defaults = {
   organizational_budget = 1000
 }
 ```
+
+### Payer CloudFormation Stacks
+
+`payer_cloudformation_stacks` deploys arbitrary CloudFormation stacks into the
+payer (management) account. It's the right hook for things like billing
+notifications, payer-scoped cost-explorer alarms, or other automation that has
+to live in the payer because of where billing data and Organizations APIs are
+exposed.
+
+Each map entry creates one stack per region listed. The Terraform resource
+addresses use a `<key>-<region>` composite, so adding a region later does not
+rename existing stacks.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `stack_name` | string | required | CloudFormation stack name |
+| `template_file` | string | conditional | Local path to template, relative to the caller's `path.root`. Exactly one of `template_file` or `template_url` is required |
+| `template_url` | string | conditional | HTTPS/S3 URL to the template. Exactly one of `template_file` or `template_url` is required |
+| `regions` | list(string) | base org-kickstart region | Regions to deploy the stack into |
+| `parameters` | map(string) | `{}` | CloudFormation parameter values |
+| `timeout_in_minutes` | number | `15` | Stack create/update timeout |
+| `on_failure` | string | `"DO_NOTHING"` | One of `DO_NOTHING`, `ROLLBACK`, `DELETE` |
+
+All stacks are created with the full set of CloudFormation capabilities
+(`CAPABILITY_IAM`, `CAPABILITY_NAMED_IAM`, `CAPABILITY_AUTO_EXPAND`).
+
+```hcl
+payer_cloudformation_stacks = {
+  billing_alerts = {
+    stack_name    = "slack_billing_alerts"
+    template_file = "cloudformation/slack-Template.yaml"
+    regions       = ["us-east-1"]
+    parameters = {
+      pExecutionRate = "cron(0 09 * * ? *)"
+      # JSON-valued parameters can be written as heredocs. The module
+      # canonicalizes any value that parses as JSON, so multi-line
+      # formatting does not cause drift on subsequent plans.
+      pEventInput = <<-EOT
+        {
+          "threshold": "10",
+          "alert_percent": "20"
+        }
+      EOT
+      pSlackWebhookSecret = "SlackWebHook"
+      pRuleState          = "ENABLED"
+      pAccountDescription = "My-Payer"
+    }
+  }
+}
+```
+
+### Security Account Stacks
+
+`security_account_stacks` is the same idea as `payer_cloudformation_stacks`,
+but the stacks are deployed into the Security Account via the
+`OrganizationAccountAccessRole`. Use it for security-scoped automation that
+needs to live in the delegated-admin account: Security Hub finding processors,
+GuardDuty event handlers, KMS keys for security data, ChatBot integrations,
+and similar.
+
+Schema, defaults, composite-key behavior, capabilities, and JSON parameter
+canonicalization are identical to `payer_cloudformation_stacks`.
+
+```hcl
+security_account_stacks = {
+  findings_processor = {
+    stack_name    = "security-findings-processor"
+    template_file = "cloudformation/findings-processor-Template.yaml"
+    regions       = ["us-east-1"]
+    parameters = {
+      pSlackWebhookSecret = "SlackWebHook"
+      pSeverityThreshold  = "MEDIUM"
+    }
+  }
+}
+```
