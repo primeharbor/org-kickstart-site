@@ -28,7 +28,7 @@ release:
 	mkdir content/en/blog/release/$(ver)
 	$(HUGO) new blog/release/$(ver)/index.md
 
-deploy: generate-module-docs
+deploy: generate-module-docs clean build-static
 	hugo deploy
 
 # -----------------------------------------------------------------------
