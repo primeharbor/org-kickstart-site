@@ -22,8 +22,10 @@ Log into the **root** user of your new AWS "payer" account and complete the foll
 
 > **Log out of root and never use it again.**
 
-> **Note:** As of January 2026, Terraform does not support the `aws login` capability.
-> An IAM Identity Center or IAM User must be created to run Terraform.
+> **Note:** As of June 2026, `aws login` works for the **root** user with Terraform — but the
+> root user **cannot assume IAM roles**, and Org Kickstart assumes roles (for example
+> `OrganizationAccountAccessRole` into the security account). That is why you must run Terraform as
+> an IAM Identity Center user or an IAM User rather than as root.
 
 ## On Your Machine
 
@@ -35,6 +37,14 @@ Log into the **root** user of your new AWS "payer" account and complete the foll
    # or
    export AWS_PROFILE=your-sso-profile
    ```
+4. Create the S3 bucket that will hold the Terraform state. It must exist before the first
+   `terraform init`, since the S3 backend lives in it:
+   ```bash
+   aws s3 mb s3://org-kickstart-fooli
+   ```
+   This is the bucket you set as `backend_bucket`. By default (`manage_state_bucket = true`) Org
+   Kickstart then adopts it into Terraform and enforces versioning, public-access-block, and
+   encryption — see the [Parameter Reference](../../reference/parameter-reference/#state-bucket).
 
 You are now ready to deploy Org Kickstart.
 
