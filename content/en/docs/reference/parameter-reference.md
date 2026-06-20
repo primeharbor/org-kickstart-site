@@ -47,6 +47,8 @@ top-level variables. Below are the key configuration parameters.
 | `admin_permission_set_name` | string | `"AdministratorAccess"` | Name of the admin Permission Set |
 | `admin_group_name` | string | `"AllAdmins"` | Name of the admin Identity Center group |
 | `disable_sso_management` | bool | `false` | Set `true` to stop Terraform from managing SSO |
+| `sso_instance_region` | string | `"us-east-1"` | Region where the IAM Identity Center instance is configured |
+| `sso_start_url` | string | required when SSO is managed | AWS access portal URL, e.g. `https://yourorg.awsapps.com/start` |
 
 ### Audit Role
 
@@ -66,15 +68,54 @@ top-level variables. Below are the key configuration parameters.
 
 ### Security Services
 
-Configure which security services to enable/disable:
+Configure which security services to enable/disable (each defaults to `false`):
 
 ```hcl
 security_services = {
   disable_guardduty   = false
-  disable_securityhub = false
   disable_macie       = false
+  disable_inspector   = false
+  disable_securityhub = false
+  disable_stacksets   = false
 }
 ```
+
+### Log & Findings Buckets
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `vpc_flowlogs_bucket_name` | string | `null` | S3 bucket to create for VPC Flow Logs. `null` to skip |
+| `macie_bucket_name` | string | `null` | S3 bucket to create for Macie findings. `null` to skip |
+
+### Organization Services & Policy Types
+
+org-kickstart enables an opinionated set of AWS service-access principals and organization policy types. Adjust the defaults with:
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `aws_service_access_principals_to_enable` | list(string) | `[]` | Extra service principals to enable beyond the default set |
+| `aws_service_access_principals_to_exclude` | list(string) | `[]` | Service principals to remove from the default set |
+| `organization_policy_types_to_exclude` | list(string) | `[]` | Org policy types to exclude from the default set (e.g. when a partition doesn't support one) |
+
+### Account Configurator
+
+Optional integration with [pht-account-configurator](https://github.com/primeharbor/pht-account-configurator) to harden new accounts on creation — see the [Account Configurator](../../account-configurator/) guide. Set the `account_configurator` object, or omit it to disable:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `template` | string | S3 URL of the packaged configurator CloudFormation template |
+| `account_factory_config_file` | string | Path (relative to repo root) to the YAML config file; Terraform uploads it to the state bucket |
+
+### DataTrail
+
+Optional [DataTrail](https://github.com/primeharbor/org-kickstart/pull/14) (CloudTrail S3 data-event) configuration in the security account. Set the `datatrail` object, or omit it to disable:
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `bucket_name` | string | required | S3 bucket holding the DataTrail logs |
+| `trail_name` | string | required | Name of the CloudTrail data-event trail |
+| `enabled` | bool | `true` | Whether the trail is enabled |
+| `excluded_buckets` | list(string) | required | S3 buckets to exclude from data-event logging |
 
 ### Organizational Units
 
@@ -106,7 +147,6 @@ accounts = {
     parent_ou_name        = "Workloads"           # OU name (or use parent_ou_id)
     monthly_budget_amount = 1000                  # optional, in USD
     delegated_admin       = ["service.amazonaws.com"]  # optional
-    close_on_deletion     = false                 # optional
 
     # Optional: override primary contact for this account
     primary_contact = {
@@ -121,6 +161,24 @@ accounts = {
       phone_number    = "+14041234567"
     }
   }
+}
+```
+
+The org-wide `default_close_on_deletion` (bool, default `false`) controls whether an account is
+**closed** — not just removed from the org — when it leaves org-kickstart. Use with caution.
+
+### Security Account
+
+The security account is created and managed like a workload account, but its settings live in a
+dedicated **required** `security_account` block. Its name and root email come from
+`security_account_name` / `security_account_root_email`; everything else is optional:
+
+```hcl
+security_account = {
+  delegated_admin         = ["guardduty.amazonaws.com"]  # services it is delegated admin for
+  monthly_budget_amount   = 100                          # optional, USD
+  budget_alert_recipients = ["security@example.com"]     # optional
+  # operations_contact and primary_contact may also be set (same shape as an account entry)
 }
 ```
 

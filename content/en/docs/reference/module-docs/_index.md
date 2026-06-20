@@ -14,38 +14,43 @@ Run `make generate-module-docs` in the `org-kickstart-site/` directory to refres
 ## Requirements
 
 | Name | Version |
-|------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.80.0 |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0, < 2.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.27.0 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.80.0 |
-| <a name="provider_aws.security-account"></a> [aws.security-account](#provider\_aws.security-account) | >= 5.80.0 |
-| <a name="provider_external"></a> [external](#provider\_external) | n/a |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.27.0 |
+| <a name="provider_aws.security-account"></a> [aws.security-account](#provider\_aws.security-account) | >= 6.27.0 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_accounts"></a> [accounts](#module\_accounts) | ./modules/account | n/a |
 | <a name="module_billing_alerts"></a> [billing\_alerts](#module\_billing\_alerts) | ./modules/billing_alerts | n/a |
-| <a name="module_declarative_policies"></a> [declarative\_policies](#module\_declarative\_policies) | ./modules/declarative_policies | n/a |
-| <a name="module_rcp"></a> [rcp](#module\_rcp) | ./modules/rcp | n/a |
-| <a name="module_scp"></a> [scp](#module\_scp) | ./modules/scp | n/a |
+| <a name="module_datatrail"></a> [datatrail](#module\_datatrail) | ./modules/datatrail | n/a |
+| <a name="module_declarative_policies"></a> [declarative\_policies](#module\_declarative\_policies) | ./modules/org_policies | n/a |
+| <a name="module_rcp"></a> [rcp](#module\_rcp) | ./modules/org_policies | n/a |
+| <a name="module_scp"></a> [scp](#module\_scp) | ./modules/org_policies | n/a |
+| <a name="module_security-services"></a> [security-services](#module\_security-services) | ./modules/security_services | n/a |
 | <a name="module_security_account"></a> [security\_account](#module\_security\_account) | ./modules/account | n/a |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_account_alternate_contact.billing](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_alternate_contact) | resource |
 | [aws_account_alternate_contact.operations](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_alternate_contact) | resource |
 | [aws_account_alternate_contact.security](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_alternate_contact) | resource |
 | [aws_account_primary_contact.primary](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_primary_contact) | resource |
+| [aws_budgets_budget.organization](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/budgets_budget) | resource |
 | [aws_cloudformation_stack.account_factory](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack) | resource |
 | [aws_cloudformation_stack.audit_role_payer](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack) | resource |
+| [aws_cloudformation_stack.payer](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack) | resource |
+| [aws_cloudformation_stack.security](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack) | resource |
 | [aws_cloudformation_stack_set.audit_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack_set) | resource |
 | [aws_cloudformation_stack_set_instance.audit_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack_set_instance) | resource |
 | [aws_cloudtrail.org_cloudtrail](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail) | resource |
@@ -60,8 +65,8 @@ Run `make generate-module-docs` in the `org-kickstart-site/` directory to refres
 | [aws_kms_key_policy.macie_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key_policy) | resource |
 | [aws_organizations_account.payer](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_account) | resource |
 | [aws_organizations_delegated_administrator.cloudformation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_delegated_administrator) | resource |
+| [aws_organizations_delegated_administrator.health](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_delegated_administrator) | resource |
 | [aws_organizations_delegated_administrator.securityhub](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_delegated_administrator) | resource |
-| [aws_organizations_delegated_administrator.sso](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_delegated_administrator) | resource |
 | [aws_organizations_organization.org](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organization) | resource |
 | [aws_organizations_organizational_unit.custom_ous](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organizational_unit) | resource |
 | [aws_organizations_organizational_unit.governance_ou](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organizational_unit) | resource |
@@ -70,11 +75,14 @@ Run `make generate-module-docs` in the `org-kickstart-site/` directory to refres
 | [aws_organizations_organizational_unit.workloads_ou](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organizational_unit) | resource |
 | [aws_organizations_policy.ai_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_policy) | resource |
 | [aws_organizations_policy_attachment.ai_policy_root](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_policy_attachment) | resource |
+| [aws_ram_sharing_with_organization.enable](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ram_sharing_with_organization) | resource |
 | [aws_s3_bucket.billing_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket.cloudtrail_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket.declarative_policy_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket.macie_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket.state_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket.vpc_flowlogs_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_lifecycle_configuration.billing_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration) | resource |
 | [aws_s3_bucket_notification.bucket_notification](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification) | resource |
 | [aws_s3_bucket_ownership_controls.cloudtrail_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls) | resource |
 | [aws_s3_bucket_ownership_controls.declarative_policy_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls) | resource |
@@ -85,14 +93,18 @@ Run `make generate-module-docs` in the `org-kickstart-site/` directory to refres
 | [aws_s3_bucket_policy.declarative_policy_bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
 | [aws_s3_bucket_policy.macie_bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
 | [aws_s3_bucket_policy.vpc_flowlogs_bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_s3_bucket_public_access_block.billing_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_s3_bucket_public_access_block.cloudtrail_bucket_bpa](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_s3_bucket_public_access_block.declarative_policy_bucket_bpa](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_s3_bucket_public_access_block.macie_bucket_bpa](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
+| [aws_s3_bucket_public_access_block.state_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_s3_bucket_public_access_block.vpc_flowlogs_bucket_bpa](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_s3_bucket_server_side_encryption_configuration.macie_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
+| [aws_s3_bucket_server_side_encryption_configuration.state_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
 | [aws_s3_bucket_versioning.cloudtrail_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
 | [aws_s3_bucket_versioning.declarative_policy_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
 | [aws_s3_bucket_versioning.macie_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
+| [aws_s3_bucket_versioning.state_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
 | [aws_s3_bucket_versioning.vpc_flowlogs_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
 | [aws_s3_object.account_factory_config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
 | [aws_securityhub_account.payer_account](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/securityhub_account) | resource |
@@ -115,58 +127,83 @@ Run `make generate-module-docs` in the `org-kickstart-site/` directory to refres
 | [aws_iam_policy_document.vpc_flowlogs_bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_organizations_organization.org](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/organizations_organization) | data source |
 | [aws_organizations_organizational_units.all_ous](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/organizations_organizational_units) | data source |
-| [aws_regions.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/regions) | data source |
+| [aws_organizations_policies.dp_ec2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/organizations_policies) | data source |
+| [aws_organizations_policies.rcps](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/organizations_policies) | data source |
+| [aws_organizations_policies.scps](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/organizations_policies) | data source |
+| [aws_organizations_policy.dp_ec2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/organizations_policy) | data source |
+| [aws_organizations_policy.rcps](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/organizations_policy) | data source |
+| [aws_organizations_policy.scps](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/organizations_policy) | data source |
+| [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
+| [aws_regions.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/regions) | data source |
 | [aws_ssoadmin_instances.identity_store](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssoadmin_instances) | data source |
-| [external_external.get_caller_identity](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_account_configurator"></a> [account\_configurator](#input\_account\_configurator) | n/a | `any` | `null` | no |
-| <a name="input_accounts"></a> [accounts](#input\_accounts) | Account Index | `any` | n/a | yes |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_account_configurator"></a> [account\_configurator](#input\_account\_configurator) | Serverless Application to configure new accounts. See https://github.com/primeharbor/pht-account-configurator | <pre>object({<br/>    account_factory_config_file = string<br/>    template                    = string<br/>  })</pre> | `null` | no |
+| <a name="input_accounts"></a> [accounts](#input\_accounts) | AWS accounts to provision in the organization. | <pre>map(<br/>    object({<br/>      account_name    = string<br/>      account_email   = string<br/>      delegated_admin = optional(list(string), [])<br/>      operations_contact = optional(object({<br/>        name          = string<br/>        title         = string<br/>        email_address = string<br/>        phone_number  = string<br/>      }))<br/>      primary_contact = optional(object({<br/>        full_name          = string<br/>        company_name       = optional(string)<br/>        address_line_1     = string<br/>        address_line_2     = optional(string)<br/>        address_line_3     = optional(string)<br/>        city               = string<br/>        district_or_county = optional(string)<br/>        state_or_region    = optional(string)<br/>        postal_code        = string<br/>        country_code       = string<br/>        phone_number       = string<br/>        website_url        = optional(string)<br/>      }))<br/>      # parent_ou_id can explicitly override the OU assignment and lookup by name.<br/>      # parent_ou_id takes precedence over parent_ou_name<br/>      parent_ou_name            = optional(string, "Workloads")<br/>      parent_ou_id              = optional(string, null)<br/>      monthly_budget_amount     = optional(number, 0)<br/>      budget_alert_recipients   = optional(list(string), [])<br/>      service_control_policies  = optional(list(string), [])<br/>      resource_control_policies = optional(list(string), [])<br/>      declarative_policies_ec2  = optional(list(string), [])<br/>    })<br/>  )</pre> | n/a | yes |
 | <a name="input_admin_group_name"></a> [admin\_group\_name](#input\_admin\_group\_name) | Name of the Identity Store Group with all the admin users | `string` | `"AllAdmins"` | no |
-| <a name="input_admin_permission_set_name"></a> [admin\_permission\_set\_name](#input\_admin\_permission\_set\_name) | Name of the Permission Set to Create | `string` | `"AdministratorAccess"` | no |
+| <a name="input_admin_permission_set_name"></a> [admin\_permission\_set\_name](#input\_admin\_permission\_set\_name) | Name of the Default Admin Permission Set to Create | `string` | `"AdministratorAccess"` | no |
 | <a name="input_audit_role_name"></a> [audit\_role\_name](#input\_audit\_role\_name) | Name of the AuditRole to deploy | `string` | `"security-audit"` | no |
 | <a name="input_audit_role_stack_set_template_url"></a> [audit\_role\_stack\_set\_template\_url](#input\_audit\_role\_stack\_set\_template\_url) | URL that points to the Audit Role Policy Template | `string` | `null` | no |
-| <a name="input_backend_bucket"></a> [backend\_bucket](#input\_backend\_bucket) | n/a | `any` | n/a | yes |
-| <a name="input_billing_alerts"></a> [billing\_alerts](#input\_billing\_alerts) | n/a | `any` | `null` | no |
-| <a name="input_billing_data_bucket_name"></a> [billing\_data\_bucket\_name](#input\_billing\_data\_bucket\_name) | Name of the S3 Bucket for CUR reports. Set to null to disable | `string` | `null` | no |
-| <a name="input_cloudtrail_bucket_name"></a> [cloudtrail\_bucket\_name](#input\_cloudtrail\_bucket\_name) | Name of the S3 Bucket to create to store CloudTrail events. Set to null to disable cloudtrail management | `string` | `null` | no |
-| <a name="input_cloudtrail_loggroup_name"></a> [cloudtrail\_loggroup\_name](#input\_cloudtrail\_loggroup\_name) | Name of the CloudWatch Log Group in the payer account where CloudTrail will send its events | `string` | `null` | no |
+| <a name="input_aws_service_access_principals_to_enable"></a> [aws\_service\_access\_principals\_to\_enable](#input\_aws\_service\_access\_principals\_to\_enable) | List of AWS service access principals to enable if they're not part of the default set. | `list(string)` | `[]` | no |
+| <a name="input_aws_service_access_principals_to_exclude"></a> [aws\_service\_access\_principals\_to\_exclude](#input\_aws\_service\_access\_principals\_to\_exclude) | List of AWS service access principals to exclude from the default set. | `list(string)` | `[]` | no |
+| <a name="input_backend_bucket"></a> [backend\_bucket](#input\_backend\_bucket) | Name of the S3 bucket used for the CloudFormation stacks and Terraform state backend | `string` | n/a | yes |
+| <a name="input_billing_alerts"></a> [billing\_alerts](#input\_billing\_alerts) | Triggers for billing alerts and who should receive them. | <pre>object({<br/>    levels        = map(number)<br/>    subscriptions = list(string)<br/>  })</pre> | `null` | no |
+| <a name="input_billing_data_bucket_name"></a> [billing\_data\_bucket\_name](#input\_billing\_data\_bucket\_name) | Name of the S3 Bucket for CUR reports. Set to null to disable CUR report generation. | `string` | `null` | no |
+| <a name="input_budget_defaults"></a> [budget\_defaults](#input\_budget\_defaults) | Default values for AWS Budgets. Some settings can be overridden in the account definition. | <pre>object({<br/>    alert_recipients      = optional(list(string), [])<br/>    currency              = optional(string, "USD")<br/>    warning_percentage    = optional(number, 85)<br/>    organizational_budget = optional(number, 0)<br/>  })</pre> | `{}` | no |
+| <a name="input_cloudtrail_bucket_name"></a> [cloudtrail\_bucket\_name](#input\_cloudtrail\_bucket\_name) | Name of the S3 Bucket to create to store CloudTrail events. Set to null to disable CloudTrail management | `string` | `null` | no |
+| <a name="input_cloudtrail_loggroup_name"></a> [cloudtrail\_loggroup\_name](#input\_cloudtrail\_loggroup\_name) | Name of the CloudWatch Log Group in the payer account where CloudTrail will send its events. Set to null to disable CloudTrail to CloudWatch Logs. | `string` | `null` | no |
 | <a name="input_cur_report_frequency"></a> [cur\_report\_frequency](#input\_cur\_report\_frequency) | Frequency CUR reports should be delivered (DAILY, HOURLY, MONTHLY). Set to NONE to disable | `string` | `"NONE"` | no |
-| <a name="input_declarative_policies"></a> [declarative\_policies](#input\_declarative\_policies) | Map of Declarative Policies to deploy | `map` | `{}` | no |
-| <a name="input_declarative_policy_bucket_name"></a> [declarative\_policy\_bucket\_name](#input\_declarative\_policy\_bucket\_name) | Name of S3 Bucket for Declarative Policy Reports | `any` | `null` | no |
-| <a name="input_deploy_audit_role"></a> [deploy\_audit\_role](#input\_deploy\_audit\_role) | Boolean to determine if org-kickstart should manage Audit Role | `bool` | `true` | no |
-| <a name="input_disable_sso_management"></a> [disable\_sso\_management](#input\_disable\_sso\_management) | Set to true to manage AWS Identity Center outside of org-kickstart | `bool` | `false` | no |
-| <a name="input_global_billing_contact"></a> [global\_billing\_contact](#input\_global\_billing\_contact) | Map for the central billing alternate contact to be applied to all accounts | `any` | `null` | no |
-| <a name="input_global_operations_contact"></a> [global\_operations\_contact](#input\_global\_operations\_contact) | Map for the central operations alternate contact to be applied to all accounts | `any` | `null` | no |
-| <a name="input_global_primary_contact"></a> [global\_primary\_contact](#input\_global\_primary\_contact) | Map for the primary account owner to be applied to all accounts | `any` | `null` | no |
-| <a name="input_global_security_contact"></a> [global\_security\_contact](#input\_global\_security\_contact) | Map for the central security alternate contact to be applied to all accounts | `any` | `null` | no |
+| <a name="input_datatrail"></a> [datatrail](#input\_datatrail) | Details on the DataTrails | <pre>object({<br/>    bucket_name      = string<br/>    trail_name       = string<br/>    enabled          = optional(bool, true)<br/>    excluded_buckets = list(string)<br/>  })</pre> | `null` | no |
+| <a name="input_declarative_policies"></a> [declarative\_policies](#input\_declarative\_policies) | Map of Declarative Policies to create and attach. | <pre>map(object({<br/>    policy_name        = string<br/>    policy_type        = string<br/>    policy_description = string<br/>    policy_json_file   = string<br/>    policy_targets     = optional(list(string), ["Root"])<br/>    policy_vars        = optional(map(string), {})<br/>    do_not_attach      = optional(bool, false)<br/>  }))</pre> | `{}` | no |
+| <a name="input_declarative_policy_bucket_name"></a> [declarative\_policy\_bucket\_name](#input\_declarative\_policy\_bucket\_name) | Name of S3 Bucket for Declarative Policy Reports. Set to null to disable Declarative Policy Reports. | `string` | `null` | no |
+| <a name="input_default_close_on_deletion"></a> [default\_close\_on\_deletion](#input\_default\_close\_on\_deletion) | If set, the AWS Account will be closed when it's removed from org-kickstart. Set this with caution. | `bool` | `false` | no |
+| <a name="input_deploy_audit_role"></a> [deploy\_audit\_role](#input\_deploy\_audit\_role) | Boolean to determine if org-kickstart should manage a Security Audit Role. Set to false to disable the creation of an Audit Role stackset. | `bool` | `true` | no |
+| <a name="input_disable_sso_management"></a> [disable\_sso\_management](#input\_disable\_sso\_management) | Set to true to disable creating a default Admin Permission Set in Identity Center. | `bool` | `false` | no |
+| <a name="input_global_billing_contact"></a> [global\_billing\_contact](#input\_global\_billing\_contact) | Billing alternate contact to be applied to all accounts. | <pre>object({<br/>    name          = string<br/>    title         = string<br/>    email_address = string<br/>    phone_number  = string<br/>  })</pre> | `null` | no |
+| <a name="input_global_operations_contact"></a> [global\_operations\_contact](#input\_global\_operations\_contact) | Default operations alternate contact to be applied to all accounts. Can be overridden in account definition. | <pre>object({<br/>    name          = string<br/>    title         = string<br/>    email_address = string<br/>    phone_number  = string<br/>  })</pre> | `null` | no |
+| <a name="input_global_primary_contact"></a> [global\_primary\_contact](#input\_global\_primary\_contact) | Default primary account owner to be applied to all accounts. Can be overridden in account definition. | <pre>object({<br/>    full_name          = string<br/>    company_name       = optional(string)<br/>    address_line_1     = string<br/>    address_line_2     = optional(string)<br/>    address_line_3     = optional(string)<br/>    city               = string<br/>    district_or_county = optional(string)<br/>    state_or_region    = optional(string)<br/>    postal_code        = string<br/>    country_code       = string<br/>    phone_number       = string<br/>    website_url        = optional(string)<br/>  })</pre> | `null` | no |
+| <a name="input_global_security_contact"></a> [global\_security\_contact](#input\_global\_security\_contact) | Security alternate contact to be applied to all accounts | <pre>object({<br/>    name          = string<br/>    title         = string<br/>    email_address = string<br/>    phone_number  = string<br/>  })</pre> | `null` | no |
 | <a name="input_macie_bucket_name"></a> [macie\_bucket\_name](#input\_macie\_bucket\_name) | Name of the S3 Bucket to create to store Macie Findings. Set to null to skip creation | `string` | `null` | no |
+| <a name="input_manage_state_bucket"></a> [manage\_state\_bucket](#input\_manage\_state\_bucket) | Manage the S3 bucket named by backend\_bucket (the bucket that holds this Terraform state) with<br/>Terraform. The bucket must already exist (it has to, in order to run Terraform at all), so it is<br/>adopted via an import block in the calling module rather than created. When true, Terraform<br/>enforces versioning, public-access-block, and encryption on it. Set to false to leave the bucket<br/>entirely outside Terraform's management. | `bool` | `true` | no |
 | <a name="input_organization_name"></a> [organization\_name](#input\_organization\_name) | Name of the Organization. This is used for resource prefixes and general reference | `string` | n/a | yes |
-| <a name="input_organization_units"></a> [organization\_units](#input\_organization\_units) | Map of OUs to deploy | `map` | `{}` | no |
-| <a name="input_payer_email"></a> [payer\_email](#input\_payer\_email) | Root Email address for the Organization Management account | `string` | `null` | no |
+| <a name="input_organization_policy_types_to_exclude"></a> [organization\_policy\_types\_to\_exclude](#input\_organization\_policy\_types\_to\_exclude) | List of organization policy types to exclude from the default set. | `list(string)` | `[]` | no |
+| <a name="input_organization_units"></a> [organization\_units](#input\_organization\_units) | Map of OUs to create. | <pre>map(<br/>    object({<br/>      name             = string<br/>      is_child_of_root = optional(bool) # This is ignored, it is retained for backwards compatibility<br/>      parent_id        = optional(string)<br/>    })<br/>  )</pre> | `{}` | no |
+| <a name="input_payer_cloudformation_stacks"></a> [payer\_cloudformation\_stacks](#input\_payer\_cloudformation\_stacks) | Map of CloudFormation stacks to deploy into the payer account. Exactly one of template\_file (local path relative to path.root) or template\_url (S3/HTTPS URL) must be set per stack. If regions is omitted, the stack is deployed only in the base org-kickstart region. | <pre>map(<br/>    object({<br/>      stack_name         = string<br/>      template_file      = optional(string)<br/>      template_url       = optional(string)<br/>      regions            = optional(list(string))<br/>      parameters         = optional(map(string), {})<br/>      timeout_in_minutes = optional(number, 15)<br/>      on_failure         = optional(string, "DO_NOTHING")<br/>    })<br/>  )</pre> | `{}` | no |
+| <a name="input_payer_email"></a> [payer\_email](#input\_payer\_email) | Root Email address for the Organization Management account | `string` | n/a | yes |
 | <a name="input_payer_name"></a> [payer\_name](#input\_payer\_name) | Name of the Organization Management account | `string` | `"AWS Payer"` | no |
-| <a name="input_resource_control_policies"></a> [resource\_control\_policies](#input\_resource\_control\_policies) | Map of RCPs to deploy | `map` | `{}` | no |
+| <a name="input_resource_control_policies"></a> [resource\_control\_policies](#input\_resource\_control\_policies) | Map of RCPs to create and attach. | <pre>map(<br/>    object({<br/>      policy_name        = string<br/>      policy_description = string<br/>      policy_json_file   = string<br/>      policy_targets     = optional(list(string), ["Root"])<br/>      policy_vars        = optional(map(string), {})<br/>      do_not_attach      = optional(bool, false)<br/>    })<br/>  )</pre> | `{}` | no |
+| <a name="input_security_account"></a> [security\_account](#input\_security\_account) | Settings for the Security Account. | <pre>object({<br/>    # These will move from the main module to here at some point.<br/>    # account_name    = string<br/>    # account_email   = string<br/>    delegated_admin = optional(list(string), [])<br/>    operations_contact = optional(object({<br/>      name          = string<br/>      title         = string<br/>      email_address = string<br/>      phone_number  = string<br/>    }))<br/>    primary_contact = optional(object({<br/>      full_name          = string<br/>      company_name       = optional(string)<br/>      address_line_1     = string<br/>      address_line_2     = optional(string)<br/>      address_line_3     = optional(string)<br/>      city               = string<br/>      district_or_county = optional(string)<br/>      state_or_region    = optional(string)<br/>      postal_code        = string<br/>      country_code       = string<br/>      phone_number       = string<br/>      website_url        = optional(string)<br/>    }))<br/>    monthly_budget_amount   = optional(number, 0)<br/>    budget_alert_recipients = optional(list(string), [])<br/>  })</pre> | n/a | yes |
 | <a name="input_security_account_name"></a> [security\_account\_name](#input\_security\_account\_name) | Name of the Security Account | `string` | `"Security Account"` | no |
-| <a name="input_security_account_root_email"></a> [security\_account\_root\_email](#input\_security\_account\_root\_email) | Root Email address for the security account | `string` | `null` | no |
-| <a name="input_security_services"></a> [security\_services](#input\_security\_services) | explictly disable or not manage a security service | `map` | <pre>{<br/>  "disable_guardduty": "false",<br/>  "disable_inspector": "false",<br/>  "disable_macie": "false",<br/>  "disable_securityhub": "false"<br/>}</pre> | no |
-| <a name="input_service_control_policies"></a> [service\_control\_policies](#input\_service\_control\_policies) | Map of SCPs to deploy | `map` | `{}` | no |
-| <a name="input_session_duration"></a> [session\_duration](#input\_session\_duration) | Default Session Duration | `string` | `"PT8H"` | no |
-| <a name="input_tag_set"></a> [tag\_set](#input\_tag\_set) | Default map of tags to be applied to all resources via all providers | `map(any)` | `{}` | no |
+| <a name="input_security_account_root_email"></a> [security\_account\_root\_email](#input\_security\_account\_root\_email) | Root Email address for the security account | `string` | n/a | yes |
+| <a name="input_security_account_stacks"></a> [security\_account\_stacks](#input\_security\_account\_stacks) | Map of CloudFormation stacks to deploy into the security account. Exactly one of template\_file (local path relative to path.root) or template\_url (S3/HTTPS URL) must be set per stack. If regions is omitted, the stack is deployed only in the base org-kickstart region. | <pre>map(<br/>    object({<br/>      stack_name         = string<br/>      template_file      = optional(string)<br/>      template_url       = optional(string)<br/>      regions            = optional(list(string))<br/>      parameters         = optional(map(string), {})<br/>      timeout_in_minutes = optional(number, 15)<br/>      on_failure         = optional(string, "DO_NOTHING")<br/>    })<br/>  )</pre> | `{}` | no |
+| <a name="input_security_services"></a> [security\_services](#input\_security\_services) | Explicitly disable or not manage a security service | <pre>object({<br/>    disable_guardduty   = optional(bool, false)<br/>    disable_macie       = optional(bool, false)<br/>    disable_inspector   = optional(bool, false)<br/>    disable_securityhub = optional(bool, false)<br/>    disable_stacksets   = optional(bool, false)<br/>  })</pre> | n/a | yes |
+| <a name="input_service_control_policies"></a> [service\_control\_policies](#input\_service\_control\_policies) | Map of SCPs to create and attach. | <pre>map(<br/>    object({<br/>      policy_name        = string<br/>      policy_description = string<br/>      policy_json_file   = string<br/>      policy_targets     = optional(list(string), ["Root"])<br/>      policy_vars        = optional(map(string), {})<br/>      do_not_attach      = optional(bool, false)<br/>    })<br/>  )</pre> | `{}` | no |
+| <a name="input_session_duration"></a> [session\_duration](#input\_session\_duration) | Admin Permission Set Session Duration | `string` | `"PT8H"` | no |
+| <a name="input_sso_instance_region"></a> [sso\_instance\_region](#input\_sso\_instance\_region) | Region where the AWS SSO instance is configured | `string` | `"us-east-1"` | no |
+| <a name="input_sso_start_url"></a> [sso\_start\_url](#input\_sso\_start\_url) | AWS SSO start URL (e.g., https://yourorg.awsapps.com/start) | `string` | `"https://NOT-PROVIDED.awsapps.com/start"` | no |
+| <a name="input_tag_set"></a> [tag\_set](#input\_tag\_set) | Default map of tags to be applied to all resources via all providers | `map(string)` | `{}` | no |
 | <a name="input_vpc_flowlogs_bucket_name"></a> [vpc\_flowlogs\_bucket\_name](#input\_vpc\_flowlogs\_bucket\_name) | Name of the S3 Bucket to create to store VPC Flow Logs. Set to null to skip creation | `string` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
-|------|-------------|
-| <a name="output_cloudtrail_cloudwatch_log_group"></a> [cloudtrail\_cloudwatch\_log\_group](#output\_cloudtrail\_cloudwatch\_log\_group) | n/a |
-| <a name="output_cloudtrail_s3_notification_topic"></a> [cloudtrail\_s3\_notification\_topic](#output\_cloudtrail\_s3\_notification\_topic) | n/a |
-| <a name="output_declarative_policy_bucket"></a> [declarative\_policy\_bucket](#output\_declarative\_policy\_bucket) | n/a |
-| <a name="output_macie_key_arn"></a> [macie\_key\_arn](#output\_macie\_key\_arn) | Things to pass to the Security Services Regional Modules |
-| <a name="output_org_id"></a> [org\_id](#output\_org\_id) | n/a |
-| <a name="output_org_name"></a> [org\_name](#output\_org\_name) | n/a |
-| <a name="output_security_account_id"></a> [security\_account\_id](#output\_security\_account\_id) | n/a |
+| ---- | ----------- |
+| <a name="output_account_map"></a> [account\_map](#output\_account\_map) | Map of account names (actual names, not terraform keys) to account IDs |
+| <a name="output_accounts"></a> [accounts](#output\_accounts) | Map of account names to account IDs |
+| <a name="output_cloudtrail_cloudwatch_log_group"></a> [cloudtrail\_cloudwatch\_log\_group](#output\_cloudtrail\_cloudwatch\_log\_group) | ARN of the CloudWatch Log Group that has the CloudTrail Management Events |
+| <a name="output_cloudtrail_s3_notification_topic"></a> [cloudtrail\_s3\_notification\_topic](#output\_cloudtrail\_s3\_notification\_topic) | ARN of the SNS Topic that receives S3 notifications of new CloudTrail event objects. |
+| <a name="output_declarative_policy_bucket"></a> [declarative\_policy\_bucket](#output\_declarative\_policy\_bucket) | S3 Bucket used to store declarative policies |
+| <a name="output_macie_key_arn"></a> [macie\_key\_arn](#output\_macie\_key\_arn) | ARN of the KMS Key used by Macie |
+| <a name="output_org_id"></a> [org\_id](#output\_org\_id) | ID of the AWS Organization |
+| <a name="output_org_name"></a> [org\_name](#output\_org\_name) | Name of the AWS Organization |
+| <a name="output_ou_name_to_id"></a> [ou\_name\_to\_id](#output\_ou\_name\_to\_id) | Map of OU Names to OU IDs |
+| <a name="output_security_account_id"></a> [security\_account\_id](#output\_security\_account\_id) | ID of the Security Account |
 | <a name="output_sso_instance_arn"></a> [sso\_instance\_arn](#output\_sso\_instance\_arn) | AWS Identity Center Instance ARN managed by org-kickstart |
+| <a name="output_sso_region"></a> [sso\_region](#output\_sso\_region) | AWS Region where SSO Identity Center is configured |
+| <a name="output_sso_role_name"></a> [sso\_role\_name](#output\_sso\_role\_name) | Name of the SSO Permission Set (role name) for admin access |
+| <a name="output_sso_start_url"></a> [sso\_start\_url](#output\_sso\_start\_url) | AWS SSO start URL (e.g., https://yourorg.awsapps.com/start) |
 <!-- END TERRAFORM-DOCS -->
