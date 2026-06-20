@@ -36,10 +36,11 @@ lives in the `accounts` map in your tfvars file.
    make env=your-org tf-plan
    make env=your-org tf-show
    make env=your-org tf-apply
+   make env=your-org granted # (if you're using granted)
    ```
 
 Org Kickstart will create the AWS account, place it in the correct OU, assign SSO access,
-set alternate contacts, and apply any policies that target the parent OU.
+set alternate contacts, and apply any policies that target the parent OU. See [Granted Support](/docs/granted) for more information about how org-kickstart can seed your granted registry for you.
 
 ## Account Options
 
