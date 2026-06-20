@@ -6,7 +6,7 @@ description: >
   stacks into the management account, so payer-scoped automation can live in
   the same Terraform config as the rest of your org.
 author: '[Chris Farris](https://www.chrisfarris.com)'
-draft: true
+draft: false
 ---
 
 Some automation only works in the management/payer account. Cost Explorer alarms, organization-wide billing notifications, anything that has to read `AWS::Billing` data or talk to the Organizations API as the master account. That stuff doesn't fit in a workload account, and it doesn't fit in the security account either.

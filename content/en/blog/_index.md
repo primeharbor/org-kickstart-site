@@ -2,7 +2,7 @@
 title: News
 # aliases: [/blog/2018/*]
 menu: { main: { weight: 30 } }
-draft: true
+draft: false
 ---
 
 This is the **news** section. It has two categories: News and Releases.
