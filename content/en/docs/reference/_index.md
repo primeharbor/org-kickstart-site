@@ -19,7 +19,7 @@ the repository.
 
 ## Policy Library
 
-Sample policies are included in the [`policies/`](https://github.com/primeharbor/org-kickstart/tree/0.3.0/policies)
+Sample policies are included in the [`policies/`](https://github.com/primeharbor/org-kickstart/tree/0.3.1/policies)
 directory of the repository:
 
 | File | Type | Description |

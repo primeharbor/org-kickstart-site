@@ -48,7 +48,7 @@ importing existing resources into Terraform state.
 ## Example tfvars
 
 See the [Reference](../reference/) page for a full annotated example. The
-[examples/local-deploy](https://github.com/primeharbor/org-kickstart/tree/0.3.0/examples/local-deploy)
+[examples/local-deploy](https://github.com/primeharbor/org-kickstart/tree/0.3.1/examples/local-deploy)
 directory in the repository contains a sample layout with a `Makefile`, backend config template,
 and helper scripts for running Org Kickstart from your workstation. To pin to a specific release,
 see [Releases](../releases/).

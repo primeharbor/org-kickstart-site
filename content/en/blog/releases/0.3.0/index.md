@@ -5,7 +5,7 @@ linkTitle: v0.3.0 Release
 description: >
   Declarative Policies, Resource Control Policies, Centralized Root Management, and more.
 author: '[Chris Farris](https://www.chrisfarris.com)'
-draft: true
+draft: false
 ---
 
 Org Kickstart v0.3.0 is now available. This release adds support for the newest AWS
@@ -28,5 +28,5 @@ Organizations policy types and several quality-of-life improvements.
 - Add `declarative_policies` block
 - Add `resource_control_policies` block
 
-See the [full release notes](https://github.com/primeharbor/org-kickstart/blob/main/docs/v0.3.0-notes.md)
+See the [full release notes](https://github.com/primeharbor/org-kickstart/blob/0.3.0/docs/v0.3.0-notes.md)
 on GitHub.

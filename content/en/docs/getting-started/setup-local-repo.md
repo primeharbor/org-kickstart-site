@@ -9,7 +9,7 @@ organization's configuration and deploy Org Kickstart from your workstation.
 
 ## 1. Copy the sample
 
-Copy the [`examples/local-deploy`](https://github.com/primeharbor/org-kickstart/tree/0.3.0/examples/local-deploy)
+Copy the [`examples/local-deploy`](https://github.com/primeharbor/org-kickstart/tree/0.3.1/examples/local-deploy)
 directory into your own **private** git repository. It provides:
 
 - `main.tf` — calls the Org Kickstart module
@@ -23,7 +23,7 @@ directory into your own **private** git repository. It provides:
 `main.tf` pins the module to a tagged release:
 
 ```hcl
-source = "github.com/primeharbor/org-kickstart?ref=0.3.0"
+source = "github.com/primeharbor/org-kickstart?ref=0.3.1"
 ```
 
 See [Releases](../../releases/) for tracking the rolling `latest` branch versus pinning to a tag.

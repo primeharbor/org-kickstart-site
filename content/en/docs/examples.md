@@ -7,7 +7,7 @@ weight: 3
 
 ## Local Deploy Sample
 
-The [`examples/local-deploy`](https://github.com/primeharbor/org-kickstart/tree/0.3.0/examples/local-deploy)
+The [`examples/local-deploy`](https://github.com/primeharbor/org-kickstart/tree/0.3.1/examples/local-deploy)
 directory contains a sample layout for managing your organization with Terraform from your
 workstation via its `Makefile`. It shows how to structure your organization-specific configuration
 (`<env>.tfvars`, `<env>.tfbackend`) alongside the module.
@@ -20,7 +20,7 @@ configuration file covering all major options.
 ## Policy Library
 
 Ready-to-use policy files are available in the
-[`policies/`](https://github.com/primeharbor/org-kickstart/tree/0.3.0/policies) directory:
+[`policies/`](https://github.com/primeharbor/org-kickstart/tree/0.3.1/policies) directory:
 
 - `DenyRootSCP.json` — Deny root user access
 - `SecurityControlsSCP.json.tftpl` — Base security guardrails

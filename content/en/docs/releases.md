@@ -26,17 +26,17 @@ changes before you apply.
 
 ## Tagged releases
 
-Each release is a fixed, immutable git tag — for example **`0.3.0`**. Pin to a tag for a stable,
+Each release is a fixed, immutable git tag — for example **`0.3.1`**. Pin to a tag for a stable,
 reproducible deployment:
 
 ```hcl
 module "organization" {
-  source = "github.com/primeharbor/org-kickstart?ref=0.3.0"
+  source = "github.com/primeharbor/org-kickstart?ref=0.3.1"
   # ...
 }
 ```
 
-The [`examples/local-deploy`](https://github.com/primeharbor/org-kickstart/tree/0.3.0/examples/local-deploy)
+The [`examples/local-deploy`](https://github.com/primeharbor/org-kickstart/tree/0.3.1/examples/local-deploy)
 sample pins to the current release by default. Bump the `?ref=` value when you're ready to move to a
 newer release — and read its release notes for breaking changes first.
 
@@ -48,6 +48,6 @@ in the repository.
 
 ## Which should I use?
 
-- **Production:** pin to a tagged release (`?ref=0.3.0`) and upgrade deliberately after reviewing
+- **Production:** pin to a tagged release (`?ref=0.3.1`) and upgrade deliberately after reviewing
   the release notes.
 - **Evaluating or lab environments:** track `latest` for the newest capabilities.
