@@ -30,7 +30,7 @@ top-level variables. Below are the key configuration parameters.
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `manage_state_bucket` | bool | `true` | Manage the `backend_bucket` (the S3 bucket holding Terraform state) with Terraform. The bucket must already exist; it is adopted via an `import` block in the calling module (see `examples/pipeline/main.tf`), and Terraform then enforces versioning, public-access-block, and AES256 encryption on it. It is protected with `prevent_destroy`. Set to `false` to leave the bucket unmanaged. |
+| `manage_state_bucket` | bool | `true` | Manage the `backend_bucket` (the S3 bucket holding Terraform state) with Terraform. The bucket must already exist; it is adopted via an `import` block in the calling module (see `examples/local-deploy/main.tf`), and Terraform then enforces versioning, public-access-block, and AES256 encryption on it. It is protected with `prevent_destroy`. Set to `false` to leave the bucket unmanaged. |
 
 ### CloudTrail
 

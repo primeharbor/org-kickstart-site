@@ -65,7 +65,7 @@ A Granted Registry lets everyone on the team pull the same account profiles stra
 repo — no copy/pasting config files. Since your org-kickstart repo already generates the config,
 it's the natural place to host the registry.
 
-1. **Confirm the `granted.yml` manifest.** The `examples/pipeline` sample already ships one at the
+1. **Confirm the `granted.yml` manifest.** The `examples/local-deploy` sample already ships one at the
    repo root pointing at the generated config, so there's nothing to create — just keep it. It
    looks like this:
 

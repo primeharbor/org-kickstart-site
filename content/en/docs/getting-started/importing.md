@@ -4,6 +4,14 @@ description: How to adopt Org Kickstart into an existing AWS Organization.
 weight: 3
 ---
 
+{{< alert color="warning" title="Experimental & incomplete" >}}
+Importing an existing organization is **experimental and far from complete**. It does not cover
+every resource Org Kickstart manages, so a first `terraform plan` against an adopted org will often
+show a mix of imports, in-place changes, and **new resources**. Review that plan extremely
+closely — confirm exactly what is being imported versus created (and especially that nothing is
+being **destroyed**) before you apply.
+{{< /alert >}}
+
 Org Kickstart can manage an existing AWS Organization. Several resources must be imported into
 Terraform state before running `terraform apply`.
 

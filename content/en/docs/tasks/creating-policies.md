@@ -111,5 +111,5 @@ service_control_policies = {
 
 ## Sample Policies
 
-See the [`policies/`](https://github.com/primeharbor/org-kickstart/tree/main/policies) directory
+See the [`policies/`](https://github.com/primeharbor/org-kickstart/tree/0.3.0/policies) directory
 in the repository for a library of ready-to-use policies. Or check out [PrimeHarbor's respository of Organizational Policies](https://github.com/primeharbor/aws-organizational-policies).

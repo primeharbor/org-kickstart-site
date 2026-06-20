@@ -18,15 +18,13 @@ Before running Org Kickstart you need:
 ## Steps
 
 1. Complete the [Bootstrap](bootstrap/) steps in the AWS Console
-2. Copy [`examples/pipeline`](https://github.com/primeharbor/org-kickstart/tree/main/examples/pipeline)
-   to your own private repo — it includes the `Makefile`, backend config, and directory layout
-3. Create `your-org.tfvars` and `your-org.tfbackend` for your organization
-   (see the [Reference](../reference/) for all variables; name them to match your `env` value)
-4. Initialize Terraform:
+2. [Set up your local repository](setup-local-repo/) — copy the `local-deploy` sample, pin the
+   module version, and create your `<env>.tfvars` / `<env>.tfbackend`
+3. Initialize Terraform:
    ```bash
    make env=your-org tf-init
    ```
-5. Create the Security Account first (required before full apply):
+4. Create the Security Account first (required before full apply):
    ```bash
    terraform apply -var-file="your-org.tfvars" -target module.security_account
    ```
@@ -50,6 +48,7 @@ importing existing resources into Terraform state.
 ## Example tfvars
 
 See the [Reference](../reference/) page for a full annotated example. The
-[examples/pipeline](https://github.com/primeharbor/org-kickstart/tree/main/examples/pipeline)
-directory in the repository contains a sample private-repo layout with a `Makefile`, backend config
-template, and scripts for CI/CD deployments.
+[examples/local-deploy](https://github.com/primeharbor/org-kickstart/tree/0.3.0/examples/local-deploy)
+directory in the repository contains a sample layout with a `Makefile`, backend config template,
+and helper scripts for running Org Kickstart from your workstation. To pin to a specific release,
+see [Releases](../releases/).

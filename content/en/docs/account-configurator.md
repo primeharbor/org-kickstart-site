@@ -43,9 +43,9 @@ account_configurator = {
 
 ## Setting it up
 
-The configurator is maintained in its own repo and pulled into your Org Kickstart pipeline repo as a
-git submodule. The `examples/pipeline` `Makefile` ships an `account-configurator` target that does
-the rest.
+The configurator is maintained in its own repo and pulled into your Org Kickstart deployment repo as
+a git submodule. The `examples/local-deploy` `Makefile` ships an `account-configurator` target that
+does the rest.
 
 1. **Add the submodule** (once):
 

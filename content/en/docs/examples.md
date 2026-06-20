@@ -1,15 +1,16 @@
 ---
 title: Examples
-description: Example configurations and pipeline setups.
+description: Example configurations and the local-deploy sample layout.
 date: 2025-01-01
 weight: 3
 ---
 
-## Pipeline Example
+## Local Deploy Sample
 
-The [`examples/pipeline`](https://github.com/primeharbor/org-kickstart/tree/main/examples/pipeline)
-directory in the repository contains a sample layout for a private CI/CD deployment repo.
-This shows how to structure your organization-specific configuration files alongside the module.
+The [`examples/local-deploy`](https://github.com/primeharbor/org-kickstart/tree/0.3.0/examples/local-deploy)
+directory contains a sample layout for managing your organization with Terraform from your
+workstation via its `Makefile`. It shows how to structure your organization-specific configuration
+(`<env>.tfvars`, `<env>.tfbackend`) alongside the module.
 
 ## Sample tfvars
 
@@ -19,7 +20,7 @@ configuration file covering all major options.
 ## Policy Library
 
 Ready-to-use policy files are available in the
-[`policies/`](https://github.com/primeharbor/org-kickstart/tree/main/policies) directory:
+[`policies/`](https://github.com/primeharbor/org-kickstart/tree/0.3.0/policies) directory:
 
 - `DenyRootSCP.json` — Deny root user access
 - `SecurityControlsSCP.json.tftpl` — Base security guardrails
